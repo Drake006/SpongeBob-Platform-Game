@@ -1,61 +1,48 @@
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
 <!DOCTYPE HTML>
 <html>
-  <head>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sponge Run</title>
+    <script src="https://cdn.jsdelivr.net/npm/konva@9.3.6/konva.min.js"></script>
     <style>
-      body {
-        margin: 0px;
-        padding: 0px;
-        background-color: #f7f7f7;
-      }
-    <script src="konva.js"></script>
-  </head>
-      <body>
-    <form name="startform">
-
-<input type="button" value="Begin" onClick="startGame();">
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f7f7f7;
+        }
+    </style>
+</head>
+<body>
+<form name="startform">
+    <input type="button" value="Begin" onClick="startGame();">
 </form>
 
-    <div id="container"></div>
-    <script>
-      const width = window.innerWidth;
-        const height = window.innerHeight;
+<div id="container"></div>
 
-        const stage = new Konva.Stage({
-            container: 'container',
-            width: width,
-            height: height
-        });
+<script>
+    const width = window.innerWidth;
+    const height = window.innerHeight;
 
-        const layer = new Konva.Layer();
-        stage.add(layer);
-      
-      const ground = new Konva.Rect({
-            x: 0,
-            y: height - 50,
-            width: width,
-            height: 50,
-            fill: 'black'
-        });
-       layer.add(ground);
-/*       var stageW = 800;
-      var stageH = 500;
-      var anim;
-      var messageLayer = new Konva.Layer();
-      var layer = new Konva.Layer();
-      var score = 0;
-      var gameTime = 0;
-      var gameOver = false;
-      var obstacles = new Array();
-      var char;
-      var charSpeed = 4;
-      var charHeight = 40;
-      var start = 0;
-      var level = 0;
-      var gameOver = false; */
+    const stage = new Konva.Stage({
+        container: 'container',
+        width: width,
+        height: height
+    });
 
+    const layer = new Konva.Layer();
+    stage.add(layer);
 
-      
-      </script>
-  </body>
+    const ground = new Konva.Rect({
+        x: 0,
+        y: height - 50,
+        width: width,
+        height: 50,
+        fill: 'black'
+    });
+
+    layer.add(ground);
+</script>
+</body>
 </html>
