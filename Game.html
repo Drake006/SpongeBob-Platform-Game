@@ -6,18 +6,54 @@
       body {
         margin: 0px;
         padding: 0px;
+        background-color: #f7f7f7;
       }
-      <!--<script src="kinetic-v4.4.3.min.js"></script> -->
     <script src="konva.js"></script>
   </head>
       <body>
     <form name="startform">
 
-<input type="button" value="Start" onClick="startGame();">
+<input type="button" value="Begin" onClick="startGame();">
 </form>
 
     <div id="container"></div>
     <script>
+      const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height
+        });
+
+        const layer = new Konva.Layer();
+        stage.add(layer);
+      
+      const ground = new Konva.Rect({
+            x: 0,
+            y: height - 50,
+            width: width,
+            height: 50,
+            fill: 'black'
+        });
+/*       var stageW = 800;
+      var stageH = 500;
+      var anim;
+      var messageLayer = new Konva.Layer();
+      var layer = new Konva.Layer();
+      var score = 0;
+      var gameTime = 0;
+      var gameOver = false;
+      var obstacles = new Array();
+      var char;
+      var charSpeed = 4;
+      var charHeight = 40;
+      var start = 0;
+      var level = 0;
+      var gameOver = false; */
+
+
       
       </script>
   </body>
