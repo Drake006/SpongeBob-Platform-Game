@@ -13,37 +13,46 @@
             overflow: hidden;
             background-color: #f7f7f7;
         }
+        
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
-<form name="startform">
+<form id="startform">
     <input type="button" value="Begin" onClick="startGame();">
 </form>
 
-<div id="container"></div>
+<div id="container" class="hidden"></div>
 
 <script>
-    const width = window.innerWidth;
-    const height = window.innerHeight;
+    function startGame() {
+        document.getElementById('startform').style.display = 'none';
+        document.getElementById('container').style.display = 'block';
 
-    const stage = new Konva.Stage({
-        container: 'container',
-        width: width,
-        height: height
-    });
+        const width = window.innerWidth;
+        const height = window.innerHeight;
 
-    const layer = new Konva.Layer();
-    stage.add(layer);
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height
+        });
 
-    const ground = new Konva.Rect({
-        x: 0,
-        y: height - 50,
-        width: width,
-        height: 50,
-        fill: 'black'
-    });
+        const layer = new Konva.Layer();
+        stage.add(layer);
 
-    layer.add(ground);
+        const ground = new Konva.Rect({
+            x: 0,
+            y: height - 50,
+            width: width,
+            height: 50,
+            fill: 'black'
+        });
+
+        layer.add(ground);
+    }
 </script>
 </body>
 </html>
