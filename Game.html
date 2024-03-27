@@ -40,11 +40,21 @@
     window.onload = function() {
     const characterImage = localStorage.getItem('characterImage');
     const characterSelection = localStorage.getItem('characterSelection');
-    if (characterImage && characterSelection) {
-        currentCharacter = characterSelection; // Set the currentCharacter variable
+    if (!characterImage && !characterSelection) {
+        // If both characterImage and characterSelection are not present,
+        // redirect to the character selection page
+        goToCharacterSelection();
+    } else if (characterImage && characterSelection) {
+        // If both characterImage and characterSelection are present,
+        // set the current character and show the character
+        currentCharacter = characterSelection;
         showCharacter(characterImage);
-        }
-    };
+    } else {
+        // If only one of the items is present, clear the local storage
+        localStorage.removeItem('characterImage');
+        localStorage.removeItem('characterSelection');
+    }
+};
 
     function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
