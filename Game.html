@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="Game.css">
-    <title>Ball jump</title>
+    <title>Sponge Run</title>
     <script src="https://cdn.jsdelivr.net/npm/konva@9.3.6/konva.min.js"></script>
     <style>
         body {
@@ -25,59 +25,118 @@
 </head>
 <body>
 <form id="startform">
-    <input type="button" value="Begin" onClick="startGame();">
+    <input type="button" value="Begin" onClick="goToCharacterSelection();">
 </form>
 
 <div id="container" class="hidden"></div>
 
 <script>
-    var stageW = 800;
-    var stageH = 500;
-    var anim;
-    var messageLayer = new Konva.Layer();
-    var layer = new Konva.Layer();
-    var score = 0;
-    var gameTime = 0;
-    var gameOver = false;
-    var obstacles = [];
-    var start = 0;
-    var gameOver = false;
+    let currentCharacter; // Define the currentCharacter variable
 
-    var obstacleImages = ['crabbyPatty.jpg', 'SlideObst.jpg', 'doodlebob.jpg'];
-
-    function getRandomObstacle() {
-        var randomIndex = Math.floor(Math.random() * obstacleImages.length);
-        return obstacleImages[randomIndex];
+    function goToCharacterSelection() {
+        window.location.href = 'CharSelect.html';
     }
+    
+    window.onload = function() {
+    const characterImage = localStorage.getItem('characterImage');
+    const characterSelection = localStorage.getItem('characterSelection');
+    if (!characterImage && !characterSelection) {
+        // If both characterImage and characterSelection are not present,
+        // redirect to the character selection page
+        goToCharacterSelection();
+    } else if (characterImage && characterSelection) {
+        // If both characterImage and characterSelection are present,
+        // set the current character and show the character
+        currentCharacter = characterSelection;
+        showCharacter(characterImage);
+    } else {
+        // If only one of the items is present, clear the local storage
+        localStorage.removeItem('characterImage');
+        localStorage.removeItem('characterSelection');
+    }
+};
 
-    function animateObstacle() {
-        var obstacleImage = new Image();
-        obstacleImage.src = getRandomObstacle();
-        obstacleImage.onload = function() {
-            var obstacle = new Konva.Image({
-                x: stageW,
-                y: stageH - obstacleImage.height,
-                image: obstacleImage,
-                draggable: false
+    function showCharacter(characterImage) {
+        document.getElementById('container').classList.remove('hidden');
+
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height
+        });
+
+        const layer = new Konva.Layer();
+        stage.add(layer);
+        
+        const groundHeight = 50;
+        const groundRects = [];
+        let groundWidth = width;
+        
+        for (let i = 0; i < 5; i++) {
+            const groundRect = new Konva.Rect({
+                x: i * width,
+                y: height - groundHeight,
+                width: width,
+                height: groundHeight,
+                fill: 'black'
             });
-            layer.add(obstacle);
-            obstacles.push(obstacle);
-
-            anim = new Konva.Animation(function(frame) {
-                obstacle.setX(obstacle.getX() - 4); // Adjust the speed as needed
-                if (obstacle.getX() + obstacle.getWidth() < 0) {
-                    obstacle.destroy();
-                    obstacles.shift();
-                    this.stop();
-                }
-            }, layer);
-            anim.start();
+            layer.add(groundRect);
+            groundRects.push(groundRect);
+        }
+        
+        characterImages = {
+            SpongeBob: {
+                jump: 'SpongeBobJump.jpg',
+                slide: 'SpongeBobSlide.jpg',
+                punch: 'SpongeBobKarate.jpg',
+                initial: 'SpongeBob.jpg' // Initial character image
+            },
+            PatrickRunning: {
+                jump: 'PatrickJumping.jpg',
+                slide: 'PatrickSliding.jpg',
+                punch: 'PatrickStarFight.jpg',
+                initial: 'PatrickRunning.jpg' // Initial character image
+            }
         };
-    }
 
-    function startGame() {
-        animateObstacle(); // Start animating obstacles
-        setInterval(animateObstacle, 3000); // Add new obstacles every 3 seconds
+        const character = new Image();
+        character.onload = () => {
+            const konvaCharacter = new Konva.Image({
+                x: 50, // Adjust position as needed
+                y: height - (character.height / 1.5),
+                image: character,
+                width: 100, // Adjust size as needed
+                height: 100 // Adjust size as needed
+            });
+            layer.add(konvaCharacter);
+            layer.draw();
+            
+            window.addEventListener('keydown', handleKeyPress);
+            character.src = characterImages[currentCharacter].initial;
+
+            localStorage.removeItem('characterImage');
+            
+            function handleKeyPress(event) {
+                switch (event.key) {
+                    case 'ArrowUp':
+                        character.src = characterImages[currentCharacter].jump;
+                        setTimeout(() => {
+                            character.src = characterImages[currentCharacter].initial;
+                        }, 500); // Adjust the duration of the jump animation (milliseconds)
+                        break;
+                    case 'ArrowDown':
+                        character.src = characterImages[currentCharacter].slide;
+                        break;
+                    case 'ArrowRight':
+                        character.src = characterImages[currentCharacter].punch;
+                        break;
+                }
+            }
+        };
+        character.src = characterImage;
     }
 </script>
 </body>
