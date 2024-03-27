@@ -1,17 +1,14 @@
-form {
-            text-align: center;
-        }
-input[type="button"] {
-            font-size: 24px;
-            padding: 10px 20px;
+.hidden{
+            display:none;
+}
+
+.character-selection{
+            text-align:center;
+            margin-top: 20px;
+}
+
+.character-button{
             border: none;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
-        }
-        
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
+            margin: O 10px;
+}
