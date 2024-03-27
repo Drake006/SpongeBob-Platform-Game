@@ -42,7 +42,6 @@
             showCharacter(characterImage);
         }
     };
-
     function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
 
@@ -79,10 +78,24 @@
             });
             layer.add(konvaCharacter);
             layer.draw();
+            setInterval(() => {
+                moveGround();
+            }, 1000 / 60); // 60 FPS
         };
         character.src = characterImage;
 
         localStorage.removeItem('characterImage');
+        function moveGround() {
+            for (let i = 0; i < groundRects.length; i++) {
+                const groundRect = groundRects[i];
+                groundRect.x(groundRect.x() - 5); // Adjust ground speed
+                if (groundRect.x() + width < 0) {
+                    const lastX = groundRects[groundRects.length - 1].x();
+                    groundRect.x(lastX + width);
+                }
+            }
+            layer.draw();
+        }
     }
 </script>
 </body>
