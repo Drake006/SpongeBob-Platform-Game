@@ -31,7 +31,53 @@
 <div id="container" class="hidden"></div>
 
 <script>
-    
+    var stageW = 800;
+    var stageH = 500;
+    var anim;
+    var messageLayer = new Konva.Layer();
+    var layer = new Konva.Layer();
+    var score = 0;
+    var gameTime = 0;
+    var gameOver = false;
+    var obstacles = new Array();
+    var start = 0;
+    var gameOver = false;
+    var obstacleImages = ['crabbyPatty.jpg', 'SlideObst.jpg', 'doodlebob.jpg'];
+
+    function getRandomObstacle() {
+        var randomIndex = Math.floor(Math.random() * obstacleImages.length);
+        return obstacleImages[randomIndex];
+    }
+
+    function animateObstacle() {
+        var obstacleImage = new Image();
+        obstacleImage.src = getRandomObstacle();
+        obstacleImage.onload = function() {
+            var obstacle = new Konva.Image({
+                x: stageW,
+                y: stageH - obstacleImage.height,
+                image: obstacleImage,
+                draggable: false
+            });
+            layer.add(obstacle);
+            obstacles.push(obstacle);
+
+            anim = new Konva.Animation(function(frame) {
+                obstacle.setX(obstacle.getX() - 4); // Adjust the speed as needed
+                if (obstacle.getX() + obstacle.getWidth() < 0) {
+                    obstacle.destroy();
+                    obstacles.shift();
+                    this.stop();
+                }
+            }, layer);
+            anim.start();
+        };
+    }
+
+    function startGame() {
+        animateObstacle(); // Start animating obstacles
+        setInterval(animateObstacle, 3000); // Add new obstacles every 3 seconds
+    }
 </script>
 </body>
 </html>
