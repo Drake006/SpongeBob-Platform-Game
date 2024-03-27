@@ -1,13 +1,13 @@
-.hidden{
+hidden{
             display:none;
 }
 
-.character-selection{
+character-selection{
             text-align:center;
             margin-top: 20px;
 }
 
-.character-button{
+character-button{
             border: none;
             cursor: pointer;
             margin: O 10px;
