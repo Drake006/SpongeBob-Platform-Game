@@ -1,6 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+!DOCTYPE HTML>
+<html>
 <head>
-  
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Character Selection</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .character-selection {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        
+        .character-button {
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+        
+        .character-button img {
+            width: 100px; /* Adjust size as needed */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+</head>
+<body>
+<div id="characterSelection" class="character-selection">
+    <h2>Choose Your Character</h2>
+    <button class="character-button" onClick="selectCharacter('spongeBob.jpg')">
+        <img src="spongeBob.jpg" alt="SpongeBob">
+    </button>
+    <button class="character-button" onClick="selectCharacter('PatrickRunning.jpg')">
+        <img src="PatrickRunning.jpg" alt="Patrick">
+    </button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/konva@9.3.6/konva.min.js"></script>
+<script>
+    function selectCharacter(characterImage) {
+        localStorage.setItem('characterImage', characterImage);
+        window.location.href = 'index.html';
+    }
+</script>
 </body>
 </html>
