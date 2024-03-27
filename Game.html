@@ -38,9 +38,11 @@
     }
     
     window.onload = function() {
-        const characterImage = localStorage.getItem('characterImage');
-        if (characterImage) {
-            showCharacter(characterImage);
+    const characterImage = localStorage.getItem('characterImage');
+    const characterSelection = localStorage.getItem('characterSelection');
+    if (characterImage && characterSelection) {
+        currentCharacter = characterSelection; // Set the currentCharacter variable
+        showCharacter(characterImage);
         }
     };
 
