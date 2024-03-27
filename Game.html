@@ -16,26 +16,28 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-        }
-        
+        } 
         .hidden {
             display: none;
         }
     </style>
 </head>
 <body>
+//form for begin button
 <form id="startform">
     <input type="button" value="Begin" onClick="goToCharacterSelection();">
 </form>
-
+//konva stage container
 <div id="container" class="hidden"></div>
 
 <script>
+    //global variables to be used throughout the file
     let characterImage;
     let currentCharacter;
     let character;
     let characterImages;
-    
+
+    //func that goes to character select page
     function goToCharacterSelection() {
         window.location.href = 'CharSelect.html';
     }
@@ -46,26 +48,27 @@
             showCharacter(characterImage);
         }
     };
-
+    //func that shows the character
     function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
-
+        //gets window dimensions
         const width = window.innerWidth;
         const height = window.innerHeight;
-
+        //creates Konva stage
         const stage = new Konva.Stage({
             container: 'container',
             width: width,
             height: height
         });
-
+        //layer created for elements
         const layer = new Konva.Layer();
         stage.add(layer);
         
+        //ground parameters
         const groundHeight = 50;
         const groundRects = [];
         let groundWidth=width;
-        
+        // Create Ground Rectangles
         for (let i = 0; i < 5; i++) {
             const groundRect = new Konva.Rect({
                 x: i * width,
@@ -77,6 +80,7 @@
             layer.add(groundRect);
             groundRects.push(groundRect);
         }
+        // Define Character Images, groups each animation (set of images) for that particular character
         characterImages = {
             SpongeBob: {
                 jump: 'SpongeBobJump.jpg',
@@ -91,28 +95,28 @@
                 initial: 'PatrickRunning.jpg' // Initial character image
             }
         };
-
+         // Create Character Image
         const character = new Image();
         character.onload = () => {
             const konvaCharacter = new Konva.Image({
                 x: 50, // Adjust position as needed
                 y: height -(character.height/1.5),
                 image: character,
-                width: 100, // Adjust size as needed
-                height: 100 // Adjust size as needed
+                width: 100,
+                height: 100 
             });
             layer.add(konvaCharacter);
             layer.draw();
-            
+            // Event Listener for Keyboard Input
             window.addEventListener('keydown', handleKeyPress);
-
+            // Set Character Image
             character.src = characterImages[currentCharacter].initial;
-
+            // Remove Character Image from Local Storage
             localStorage.removeItem('characterImage');
         };
-
+         // Load Character Image
         character.src = characterImage; // Load the character image
-
+         // Function to Move Ground
         function moveGround() {
             for (let i = 0; i < groundRects.length; i++) {
                 const groundRect = groundRects[i];
@@ -124,7 +128,7 @@
             }
             layer.draw();
         }
-
+         // Function to Handle Key Press Events
         function handleKeyPress(event) {
             switch (event.key) {
                 case 'ArrowUp':
