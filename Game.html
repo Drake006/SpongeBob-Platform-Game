@@ -46,7 +46,7 @@
             showCharacter(characterImage);
         }
     };
-
+    
     function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
 
@@ -77,6 +77,10 @@
             layer.add(groundRect);
             groundRects.push(groundRect);
         }
+        
+        // Move ground continuously
+        setInterval(moveGround, 50);
+        
         characterImages = {
             SpongeBob: {
                 jump: 'SpongeBobJump.jpg',
