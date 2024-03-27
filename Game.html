@@ -57,10 +57,11 @@
 
         const layer = new Konva.Layer();
         stage.add(layer);
-
+        
+        const groundHeight = 50;
         const ground = new Konva.Rect({
             x: 0,
-            y: height - 50,
+            y: height - groundHeight,
             width: width,
             height: 50,
             fill: 'black'
@@ -71,7 +72,7 @@
         character.onload = () => {
             const konvaCharacter = new Konva.Image({
                 x: 50, // Adjust position as needed
-                y: height - 100, // Adjust position as needed
+                y: height - goundHeight-chracter.height, // Adjust position as needed
                 image: character,
                 width: 100, // Adjust size as needed
                 height: 100 // Adjust size as needed
