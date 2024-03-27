@@ -46,6 +46,7 @@
             showCharacter(characterImage);
         }
     };
+
     function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
 
@@ -104,11 +105,14 @@
             layer.draw();
             
             window.addEventListener('keydown', handleKeyPress);
-        character.src = characterImages[chosenCharacter].initial;
 
-        localStorage.removeItem('characterImage');
+            character.src = characterImages[currentCharacter].initial;
 
-            
+            localStorage.removeItem('characterImage');
+        };
+
+        character.src = characterImage; // Load the character image
+
         function moveGround() {
             for (let i = 0; i < groundRects.length; i++) {
                 const groundRect = groundRects[i];
@@ -120,7 +124,8 @@
             }
             layer.draw();
         }
-            function handleKeyPress(event) {
+
+        function handleKeyPress(event) {
             switch (event.key) {
                 case 'ArrowUp':
                     character.src = characterImages[currentCharacter].jump;
