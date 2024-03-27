@@ -21,14 +21,23 @@
 </head>
 <body>
 <form id="startform">
-    <input type="button" value="Begin" onClick="startGame();">
+    <input type="button" value="Begin" onClick="showCharacterSelection();">
 </form>
 
 <div id="container" class="hidden"></div>
-
+<div> id="characterSelection" class="hidden character-selection"
+    <h2>Choose Your Character</h2>
+    <button>class="character-button" onClick=startGame('spongeBob.jpg')>SpongeBob</button>
+    <button>class="character-button" onClick=startGame('PatrickRunning.jpg')>Patrick</button>
+</div>
+    
 <script>
-    function startGame() {
-        document.getElementById('startform').style.display = 'none';
+    function showCharacterSelection() {
+        document.getElementByID('startform').style.display='none';
+        document.getElementByID('characterSelection').style.display=block;
+    }
+    function startGame(characterImage) {
+        document.getElementById('characterSelection').style.display = 'none';
         document.getElementById('container').style.display = 'block';
 
         const width = window.innerWidth;
@@ -52,6 +61,20 @@
         });
 
         layer.add(ground);
+        // Load character image
+        const character = new Image();
+        character.onload =() => {
+            const konvaCharacter=new Konva.Image({
+                x:50,
+                y: height-100,
+                image:character,
+                width:100,
+                height:100
+            })
+            layer.add(konvaCharacter);
+            layer.draw();
+        }
+        character.src=characterImage;
     }
 </script>
 </body>
