@@ -96,6 +96,18 @@
             }
             layer.draw();
         }
+        function handleKeyPress(event) {
+            switch (event.key) {
+                case 'ArrowUp':
+                    // Change character image to SpongeBobJump.jpg
+                    character.src = 'SpongeBobJump.jpg';
+                    // Set a timeout to revert back to original image after 500ms
+                    setTimeout(() => {
+                        character.src = characterImage;
+                    }, 500);
+                    break;
+            }
+        }
     }
 </script>
 </body>
