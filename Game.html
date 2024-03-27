@@ -31,7 +31,8 @@
 <div id="container" class="hidden"></div>
 
 <script>
-    
+    let currentCharacter; // Define the currentCharacter variable
+
     function goToCharacterSelection() {
         window.location.href = 'CharSelect.html';
     }
@@ -42,7 +43,8 @@
             showCharacter(characterImage);
         }
     };
-     function showCharacter(characterImage) {
+
+    function showCharacter(characterImage) {
         document.getElementById('container').classList.remove('hidden');
 
         const width = window.innerWidth;
@@ -124,5 +126,6 @@
         };
         character.src = characterImage;
     }
+</script>
 </body>
 </html>
