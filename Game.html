@@ -31,8 +31,50 @@
 <div id="container" class="hidden"></div>
 
 <script>
-   function goToCharacterSelection() {
-        window.location.href = 'CharSelect.html';
+   window.onload = function() {
+        const characterImage = localStorage.getItem('characterImage');
+        if (characterImage) {
+            showCharacter(characterImage);
+        }
+    };
+
+    function showCharacter(characterImage) {
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+
+        const stage = new Konva.Stage({
+            container: 'container',
+            width: width,
+            height: height
+        });
+
+        const layer = new Konva.Layer();
+        stage.add(layer);
+
+        const ground = new Konva.Rect({
+            x: 0,
+            y: height - 50,
+            width: width,
+            height: 50,
+            fill: 'black'
+        });
+        layer.add(ground);
+
+        const character = new Image();
+        character.onload = () => {
+            const konvaCharacter = new Konva.Image({
+                x: 50, // Adjust position as needed
+                y: height - 100, // Adjust position as needed
+                image: character,
+                width: 100, // Adjust size as needed
+                height: 100 // Adjust size as needed
+            });
+            layer.add(konvaCharacter);
+            layer.draw();
+        };
+        character.src = characterImage;
+
+        localStorage.removeItem('characterImage');
     }
 </script>
 </body>
