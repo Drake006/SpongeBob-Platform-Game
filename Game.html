@@ -39,9 +39,10 @@
     var score = 0;
     var gameTime = 0;
     var gameOver = false;
-    var obstacles = new Array();
+    var obstacles = [];
     var start = 0;
     var gameOver = false;
+
     var obstacleImages = ['crabbyPatty.jpg', 'SlideObst.jpg', 'doodlebob.jpg'];
 
     function getRandomObstacle() {
@@ -78,7 +79,6 @@
         animateObstacle(); // Start animating obstacles
         setInterval(animateObstacle, 3000); // Add new obstacles every 3 seconds
     }
-    document.getElementById("beginButton").addEventListener("click", startGame);
 </script>
 </body>
 </html>
