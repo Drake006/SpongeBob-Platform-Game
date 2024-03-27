@@ -82,23 +82,6 @@
                 moveGround();
             }, 1000 / 60); // 60 FPS
         };
-        const jumpingObstacleImage = new Image();
-            jumpingObstacleImage.onload = () => {
-                const jumpingObstacle = new Konva.Image({
-                    x: width * 2, // Adjust initial position
-                    y: height - (jumpingObstacleImage.height / 2), // Adjust position
-                    image: jumpingObstacleImage,
-                    width: 50, // Adjust size
-                    height: 50 // Adjust size
-                });
-                layer.add(jumpingObstacle);
-                layer.draw();
-                
-                // Check for collisions between character and jumping obstacle
-                checkCollisions(konvaCharacter, jumpingObstacle);
-            };
-            jumpingObstacleImage.src = 'crabbyPatty.jpg'; // Adjust image path
-        };
         character.src = characterImage;
 
         localStorage.removeItem('characterImage');
@@ -112,18 +95,6 @@
                 }
             }
             layer.draw();
-        }
-        function checkCollisions(character, obstacle) {
-            const charactersBounds = character.getClientRect();
-            const obstacleBounds = obstacle.getClientRect();
-            
-            if (charactersBounds.x < obstacleBounds.x + obstacleBounds.width &&
-                charactersBounds.x + charactersBounds.width > obstacleBounds.x &&
-                charactersBounds.y < obstacleBounds.y + obstacleBounds.height &&
-                charactersBounds.y + charactersBounds.height > obstacleBounds.y) {
-                // Collision detected, end the game
-                console.log('Game Over');
-            }
         }
     }
 </script>
