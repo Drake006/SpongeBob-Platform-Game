@@ -31,10 +31,7 @@
 <div id="container" class="hidden"></div>
 
 <script>
-    function goToCharacterSelection() {
-        window.location.href = 'CharSelect.html';
-    }
-   window.onload = function() {
+    window.onload = function() {
         const characterImage = localStorage.getItem('characterImage');
         if (characterImage) {
             showCharacter(characterImage);
@@ -42,6 +39,8 @@
     };
 
     function showCharacter(characterImage) {
+        document.getElementById('container').classList.remove('hidden');
+
         const width = window.innerWidth;
         const height = window.innerHeight;
 
