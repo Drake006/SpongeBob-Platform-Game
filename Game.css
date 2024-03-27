@@ -1,17 +1,46 @@
-form {
-            text-align: center;
-        }
-input[type="button"] {
-            font-size: 24px;
-            padding: 10px 20px;
-            border: none;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
 
-        input[type="button"]:hover {
-            background-color: #45a049;
-        }
+#startform {
+    text-align: center;
+}
+
+.character-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.character-button {
+    border: none;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.character-button img {
+    width: 100px; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+}
+
+input[type="button"] {
+    font-size: 24px;
+    padding: 10px 20px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+input[type="button"]:hover {
+    background-color: #45a049;
+}
